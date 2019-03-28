@@ -1,7 +1,7 @@
 const { createDfuseClient } = require("@dfuse/client")
 
 const account = "eoscanadacom"
-const fixedBlockNum = 42500250
+const fixedBlockNum = 42500251
 
 const client = createDfuseClient({ apiKey: process.env.DFUSE_API_KEY, network: "mainnet" });
 
