@@ -25,9 +25,12 @@ try {
 
 async function fetchBalance(client, atBlock) {
   const opts = { blockNum: atBlock === undefined ? undefined : atBlock }
-  const resp = await client.stateTable("eosio.token", account, "accounts", opts)
+  const r = await client.stateTable("eosio.token", account, "accounts", opts)
 
-  return { balance: resp.rows[0].json.balance, blockNum: resp.up_to_block_num || atBlock }
+  return { 
+    balance: r.rows[0].json.balance, 
+    blockNum: r.up_to_block_num || atBlock 
+  }
 }
 
 // Click "▶ run" to try this code right here and see `dfuse` in action right now.
