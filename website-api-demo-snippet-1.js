@@ -19,11 +19,11 @@ console.log(`Your current balance at block ${curBlockNum} is ${curBalance}`)
 
 async function fetchBalance(client, atBlock) {
   const opts = { blockNum: atBlock === undefined ? undefined : atBlock }
-  const r = await client.stateTable("eosio.token", account, "accounts", opts)
+  const resp = await client.stateTable("eosio.token", account, "accounts", opts)
   
   return { 
-    balance: r.rows[0].json.balance, 
-    blockNum: r.up_to_block_num || atBlock 
+    balance: resp.rows[0].json.balance, 
+    blockNum: resp.up_to_block_num || atBlock 
   }
 }
 
