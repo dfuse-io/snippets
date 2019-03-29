@@ -7,26 +7,20 @@ const client = createDfuseClient({
   apiKey: process.env.DFUSE_API_KEY, network: "mainnet" 
 });
 
-try {
-  const { 
-    balance: atBalance, 
-    blockNum: atBlockNum 
-  } = await fetchBalance(client, fixedBlockNum)
-  const { 
-    balance: currentBalance, 
-    blockNum: currentBlockNum 
-  } = await fetchBalance(client)
+const { 
+ balance: atBalance, blockNum: atBlockNum 
+} = await fetchBalance(client, fixedBlockNum)
+console.log(`Your balance at block ${atBlockNum} was ${atBalance}`)
 
-  console.log(`Your balance at block ${atBlockNum} was ${atBalance}`)
-  console.log(`Your current balance at block ${currentBlockNum} is ${currentBalance}`)
-} catch (error) {
-  console.log("An error occurred", error)
-}
+const { 
+  balance: curBalance, blockNum: curBlockNum 
+} = await fetchBalance(client)
+console.log(`Your current balance at block ${curBlockNum} is ${curBalance}`)
 
 async function fetchBalance(client, atBlock) {
   const opts = { blockNum: atBlock === undefined ? undefined : atBlock }
   const r = await client.stateTable("eosio.token", account, "accounts", opts)
-
+  
   return { 
     balance: r.rows[0].json.balance, 
     blockNum: r.up_to_block_num || atBlock 
