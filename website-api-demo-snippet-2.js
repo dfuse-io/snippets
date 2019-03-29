@@ -6,12 +6,12 @@ const client = createDfuseClient({
   apiKey: process.env.DFUSE_API_KEY, network: "mainnet" 
 })
 
-const response = await client.searchTransactions(`auth:${account}`, {
-  limit: 10,
+const resp = await client.searchTransactions(`auth:${account}`, {
+  limit: 5,
   sort: "desc",
 })
 
-console.log(`Your latest 10 transactions`)
+console.log(`Your last 5 transactions`)
 if (!resp.transactions || resp.transactions.length <= 0) {
     console.log("Oops nothing found")
     return
