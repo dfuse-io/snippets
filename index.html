@@ -1,0 +1,46 @@
+<html>
+<body>
+
+<h1>dfuse API demos</h1>
+
+<h1>Check your balance</h1>
+<div id="dfuse-snippet-001"></div>
+
+<h1>Latest 10 transactions</h1>
+<div id="dfuse-snippet-002"></div>
+
+<h1>Stream Global State Changes</h1>
+<div id="dfuse-snippet-003"></div>
+
+<h1>Stream Transfer</h1>
+<div id="dfuse-snippet-004"></div>
+
+<script src="https://embed.runkit.com"></script>
+<script>
+
+$(function(){
+  var snippetsVersion = 3;
+  var snippetsBaseURL = "https://raw.githubusercontent.com/dfuse-io/snippets/master/";
+  
+  function setupSnippet(snippetID) {
+    $.get( snippetsBaseURL + "website-api-demo-snippet-" + snippetID + ".js?cachebust=" + snippetsVersion, function( snippetSource ) {
+      RunKit.createNotebook({
+        title: "dfuse demo",
+        element: document.getElementById("dfuse-snippet-00" + snippetID),
+        theme: "solarized-dark", 
+        preamble: "global.fetch = require(\"node-fetch\"); global.WebSocket = require(\"ws\");",
+        source: snippetSource,
+        env: ["DFUSE_API_KEY=web_c178f6532590b7dd826cba31ed1f930e"]
+      });
+    });
+  }
+  
+  setupSnippet(1);
+  setupSnippet(2);
+  setupSnippet(3);
+  setupSnippet(4); 
+});
+
+</script>
+</body>
+</html>
