@@ -1,23 +1,21 @@
 const { createDfuseClient } = require("@dfuse/client")
 
 const account = "eoscanadacom"
-const client = createDfuseClient({ apiKey: process.env.DFUSE_API_KEY, network: "mainnet" })
 
-try {
-    const response = await client.searchTransactions(`auth:${account}`, {
-        limit: 10,
-        sort: "desc",
-    })
+const client = createDfuseClient({ 
+  apiKey: process.env.DFUSE_API_KEY, network: "mainnet" 
+})
 
-    console.log(`Your latest 10 transactions`)
-    if (!response.transactions || response.transactions.length <= 0) {
-        console.log("Oups nothing found")
-        return
-    } 
+const response = await client.searchTransactions(`auth:${account}`, {
+  limit: 10,
+  sort: "desc",
+})
 
-    response.transactions.map((result) => `https://eosq.app/tx/${result.lifecycle.id}`)
-} catch (error) {
-    console.log("An error occurred", error)
+console.log(`Your latest 10 transactions`)
+if (!resp.transactions || resp.transactions.length <= 0) {
+    console.log("Oops nothing found")
+    return
 }
+resp.transactions.map((result) => `https://eosq.app/tx/${result.lifecycle.id}`)
 
 // Click "▶ run" to try this code right here and see `dfuse` in action right now.
