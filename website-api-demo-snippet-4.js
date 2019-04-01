@@ -13,6 +13,6 @@ const stream = client.streamActionTraces(data, (message) => {
 });
 
 await waitFor(5000)
-await stream.unlisten()
+await stream.close()
 
 // Click "▶ run" to try this code right here and see `dfuse` in action right now.
