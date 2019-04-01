@@ -1,30 +1,12 @@
 const { createDfuseClient } = require("@dfuse/client")
 
-const account = "eoscanadacom"
-const fixedBlockNum = 42500250
-
 const client = createDfuseClient({ 
   apiKey: process.env.DFUSE_API_KEY, network: "mainnet" 
 });
 
-const { 
- balance: atBalance, blockNum: atBlockNum 
-} = await fetchBalance(client, fixedBlockNum)
-console.log(`Your balance at block ${atBlockNum} was ${atBalance}`)
+const resp = await client.stateTable("eosio.token", "eoscanadacom", "accounts")
+const { balance } = resp.rows[0].json
 
-const { 
-  balance: curBalance, blockNum: curBlockNum 
-} = await fetchBalance(client)
-console.log(`Your current balance at block ${curBlockNum} is ${curBalance}`)
-
-async function fetchBalance(client, atBlock) {
-  const opts = { blockNum: atBlock === undefined ? undefined : atBlock }
-  const resp = await client.stateTable("eosio.token", account, "accounts", opts)
-  
-  return { 
-    balance: resp.rows[0].json.balance, 
-    blockNum: resp.up_to_block_num || atBlock 
-  }
-}
+console.log(`Balance: ${balance} (#${resp.up_to_block_num})`)
 
 // Click "▶ run" to try this code right here and see `dfuse` in action right now.
