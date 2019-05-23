@@ -4,6 +4,7 @@ const client = createDfuseClient({
   apiKey: process.env.DFUSE_API_KEY, network: "mainnet" 
 });
 
+//Replace with your account
 const resp = await client.stateTable("eosio.token", "eoscanadacom", "accounts")
 const { balance } = resp.rows[0].json
 
