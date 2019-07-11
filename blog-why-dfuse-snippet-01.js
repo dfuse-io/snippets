@@ -6,7 +6,7 @@ const client = createDfuseClient({
 })
 
 const opts = { limit: 10, sort: "desc" }
-const resp = await client.searchTransactions("(auth:eoscanadacom OR receiver:eoscanadacom)", opts)
+const resp = await client.searchTransactions("auth:eoscanadacom", opts)
 
 console.log(`Your last 10 transactions`);
 (resp.transactions || []).map((result) => `https://eosq.app/tx/${result.lifecycle.id}`)
