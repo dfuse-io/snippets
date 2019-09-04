@@ -7,41 +7,46 @@
 
 <h1>dfuse API demos</h1>
 
-<h1>Check your balance</h1>
+<h3>EOS</h3>
+<h5>Check your balance</h5>
 <div id="dfuse-snippet-001"></div>
 
-<h1>Latest 10 transactions</h1>
+<h5>Latest 10 transactions</h5>
 <div id="dfuse-snippet-002"></div>
 
-<h1>Stream Global State Changes</h1>
+<h5>Stream Global State Changes</h5>
 <div id="dfuse-snippet-003"></div>
 
-<h1>Stream Transfer</h1>
+<h5>Stream Transfer</h5>
 <div id="dfuse-snippet-004"></div>
+
+<h3>Ethereum</h3>
+<h5>Latest 10 transactions</h5>
+<div id="dfuse-snippet-005"></div>
+
+<h5>Stream Transfers</h5>
+<div id="dfuse-snippet-006"></div>
 
 <script>
 
 $(function(){
   var snippetsVersion = 4;
   var snippetsBaseURL = "https://raw.githubusercontent.com/dfuse-io/snippets/master/";
-  
+
   function setupSnippet(snippetID) {
     $.get( snippetsBaseURL + "website-api-demo-snippet-" + snippetID + ".js?cachebust=" + snippetsVersion, function( snippetSource ) {
       RunKit.createNotebook({
         title: "dfuse demo",
         element: document.getElementById("dfuse-snippet-00" + snippetID),
-        theme: "solarized-dark", 
+        theme: "solarized-dark",
         preamble: "global.fetch = require(\"node-fetch\"); global.WebSocket = require(\"ws\");",
         source: snippetSource,
-        env: ["DFUSE_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"]
+        env: ["DFUSE_API_KEY=web_6d99c117406c10f6fd9ee25c7d6f7323"]
       });
     });
   }
-  
-  setupSnippet(1);
-  setupSnippet(2);
-  setupSnippet(3);
-  setupSnippet(4); 
+
+  [1,2,3,4,5,6].forEach((id) => { setupSnippet(id) })
 });
 
 </script>
