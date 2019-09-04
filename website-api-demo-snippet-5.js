@@ -1,4 +1,4 @@
-const { createDfuseClient } = require("@dfuse/client@next")
+const { createDfuseClient } = require("@dfuse/client@0.3.0-rc.1")
 
 const config = { apiKey: process.env.DFUSE_API_KEY, network: "mainnet.eth.dfuse.io" }
 const client = createDfuseClient(config)
