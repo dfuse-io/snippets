@@ -12,10 +12,10 @@ const stream = await client.graphql(`subscription {
   onMessage: ({ type, data }) => {
     if (type === 'data') {
       const { from, to, balances } = data.searchTransactions.node
-      const showBalance = (balance) => `${balance.new-balance.old} (${balance.address})`
-      console.log(`${from} -> ${to} [${balances.map(showBalance).join(", ")}]`)
+      const printBalance = (balance) => `${balance.new-balance.old} (${balance.address})`
+      console.log(`${from} -> ${to}`, balances.map(printBalance))
   }}
 })
 
 await waitFor(5000)
-await stream.close()
+client.release()
