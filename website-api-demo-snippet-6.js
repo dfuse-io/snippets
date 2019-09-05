@@ -1,7 +1,9 @@
 const { createDfuseClient, waitFor } = require("@dfuse/client@0.3.0-rc.1")
 
-const config = { apiKey: process.env.DFUSE_API_KEY, network: "mainnet.eth.dfuse.io" }
-const client = createDfuseClient(config);
+const client = createDfuseClient({
+  apiKey: process.env.DFUSE_API_KEY,
+  network: "mainnet.eth.dfuse.io",
+})
 
 const stream = await client.graphql(`subscription {
   searchTransactions(query: "method:\\"transfer(address,uint256)\\"") {
@@ -12,8 +14,8 @@ const stream = await client.graphql(`subscription {
   onMessage: ({ type, data }) => {
     if (type === 'data') {
       const { from, to, balances } = data.searchTransactions.node
-      const printBalance = (balance) => `${balance.new-balance.old} (${balance.address})`
-      console.log(`${from} -> ${to}`, balances.map(printBalance))
+      const print = (balance) => `${balance.new-balance.old} (${balance.address})`
+      console.log(`${from} -> ${to}`, balances.map(print))
   }}
 })
 
