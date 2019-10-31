@@ -1,4 +1,4 @@
-const { createDfuseClient, waitFor } = require("@dfuse/client@0.3.0-rc.1")
+const { createDfuseClient, waitFor } = require("@dfuse/client")
 
 const client = createDfuseClient({
   apiKey: process.env.DFUSE_API_KEY,
