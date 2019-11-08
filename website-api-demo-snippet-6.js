@@ -6,7 +6,7 @@ const client = createDfuseClient({
 })
 
 const stream = await client.graphql(`subscription {
-  searchTransactions(query: "method:\\"transfer(address,uint256)\\"") {
+  searchTransactions(index:CALLS query: "method:\\"transfer(address,uint256)\\"") {
     node { from to balances:balanceChanges {
       address new:newValue(encoding: ETHER) old:oldValue(encoding: ETHER)
     }
