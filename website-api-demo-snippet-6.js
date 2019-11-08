@@ -6,18 +6,16 @@ const client = createDfuseClient({
 })
 
 const stream = await client.graphql(`subscription {
-  searchTransactions(indexName:CALLS query: "method:\\"transfer(address,uint256)\\"") {
-    node { from to balances:balanceChanges {
-      address new:newValue(encoding: ETHER) old:oldValue(encoding: ETHER)
+  searchTransactions(lowBlockNum:-1, indexName:CALLS query: "-value:0") {
+        node { hash matchingCalls { from to value(encoding:ETHER) } }
+  }}`, (message) => {
+    if (message.type === "data") {
+      const { undo, node: { hash, value, matchingCalls }} = message.data.searchTransactions
+      matchingCalls.forEach(({ from, to, value }) => {
+        console.log(`Transfer ${from} -> ${to} [${value} Ether]${undo ? " REVERTED" : ""}`)
+      })
     }
-  }}}`, {
-  onMessage: ({ type, data }) => {
-    if (type === 'data') {
-      const { from, to, balances } = data.searchTransactions.node
-      const print = (balance) => `${balance.new-balance.old} (${balance.address})`
-      console.log(`${from} -> ${to}`, balances.map(print))
-  }}
-})
+  })
 
 await waitFor(5000)
 client.release()
