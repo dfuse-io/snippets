@@ -7,7 +7,7 @@ const client = createDfuseClient({
 
 const stream = await client.graphql(`subscription {
   searchTransactions(lowBlockNum:-1, indexName:CALLS query: "-value:0") {
-        node { hash matchingCalls { from to value(encoding:ETHER) } }
+        node { hash matchingCalls { from to value(encoding:ETH) } }
   }}`, (message) => {
     if (message.type === "data") {
       const { undo, node: { hash, value, matchingCalls }} = message.data.searchTransactions
