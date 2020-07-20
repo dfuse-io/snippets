@@ -1,7 +1,7 @@
 const { createDfuseClient } = require("@dfuse/client")
 
-const client = createDfuseClient({ 
-  apiKey: process.env.DFUSE_API_KEY, network: "mainnet" 
+const client = createDfuseClient({
+  apiKey: process.env.DFUSE_API_KEY, network: "mainnet.eos.dfuse.io"
 });
 
 //Replace with your account
