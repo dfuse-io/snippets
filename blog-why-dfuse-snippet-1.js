@@ -2,7 +2,7 @@
 const { createDfuseClient } = require("@dfuse/client")
 
 const client = createDfuseClient({ 
-  apiKey: process.env.DFUSE_API_KEY, network: "mainnet" 
+  apiKey: process.env.DFUSE_API_KEY, network: "mainnet.eos.dfuse.io" 
 })
 
 const opts = { limit: 10, sort: "desc" }
