@@ -1,7 +1,7 @@
 const { createDfuseClient, waitFor } = require("@dfuse/client")
 
 const client = createDfuseClient({
-  apiKey: process.env.DFUSE_API_KEY, network: "mainnet.eos.dfuse.io"
+  apiKey: process.env.DFUSE_API_KEY, network: "testnet.eos.dfuse.io"
 });
 
 const data = { code: "eosio", scope: "eosio", table: "global", json: true }
